@@ -10,6 +10,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.navigasidengandata.ui.view.screen.MahasiswaFormView
+import com.example.pertemuan8.ui.view.screen.SplashView
 import com.example.pertemuan8.ui.view.viewmodel.MahasiswaViewModel
 import com.example.pertemuan8.ui.view.viewmodel.RencanaStudyView
 
@@ -28,7 +30,7 @@ fun NavigationControl (
     krsViewModel: RencanaStudyView = viewModel(),
     navController: NavHostController = rememberNavController()
 ){
-    val uistate by krsViewModel.statusUI.collectAsState()
+    val MahasiswaUIState by mahasiswaViewModel.mahasiswaUIState.collectAsState()
 
     NavHost(
         navController = navController,
