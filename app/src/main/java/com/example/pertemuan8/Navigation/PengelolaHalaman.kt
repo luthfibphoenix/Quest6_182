@@ -5,9 +5,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import com.example.pertemuan8.ui.view.screen.SplashView
 import com.example.pertemuan8.ui.view.viewmodel.MahasiswaViewModel
+import com.example.pertemuan8.ui.view.viewmodel.RencanaStudyView
 
 
 enum class Halaman{
@@ -20,10 +24,11 @@ enum class Halaman{
 @Composable
 fun NavigationControl (
     modifier: Modifier = Modifier,
-    mahasiswaViewModel: MahasiswaViewModel = ViewModel(),
-    krsViewModel: RencanaStudiViewModel = ViewModel(),
+    mahasiswaViewModel: MahasiswaViewModel = viewModel(),
+    krsViewModel: RencanaStudyViewModel = viewModel(),
+    navController: NavHostController = rememberNavController()
 ){
-    val uistate by ViewModel.mahasiswaUIState.collectAsState()
+    val mahasiswaUIState = ViewModel.mahasiswaUIState.collectAsState()
     NavHost(
         navController = navController,
         startDestination = Halaman.Splash.name,

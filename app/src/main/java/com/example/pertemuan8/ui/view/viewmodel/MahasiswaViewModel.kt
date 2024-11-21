@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class MahasiswaViewModel : ViewModel(){
 
-    private val mahasiswaStateUI = MutableStateFlow(Mahasiswa())
-    val mahasiswaUIState: StateFlow<Mahasiswa> = mahasiswaStateUI.asStateFlow()
+    private val _mahasiswaStateUI = MutableStateFlow(Mahasiswa())
+    val mahasiswaUIState: StateFlow<Mahasiswa> = _mahasiswaStateUI.asStateFlow()
     fun saveDataMahasiswa(ls: MutableList<String>){
-        mahasiswaStateUI.value = Mahasiswa(
+        _mahasiswaStateUI.value = Mahasiswa(
             nim = ls[0],
             nama = ls[1],
             email = ls[2]
