@@ -31,7 +31,7 @@ import com.example.pertemuan8.model.RencanaStudi
 fun TampilView(
     mahasiswa: Mahasiswa,
     krs: RencanaStudi,
-    onbackButtonClicked: () -> Unit,
+    onBackButtonClicked: () -> Unit,
     onResetButtonClicked: () -> Unit
 ) {
     Column(
@@ -104,7 +104,7 @@ fun TampilView(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ){
-            Button(onClick = {onbackButtonClicked()}) {
+            Button(onClick = {onBackButtonClicked()}) {
                 Text(text = "Kembali")
             }
             Button(onClick = {onResetButtonClicked()}) {
