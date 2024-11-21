@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.navigasidengandata.ui.view.screen.MahasiswaFormView
 import com.example.pertemuan8.ui.view.screen.SplashView
 import com.example.pertemuan8.ui.view.viewmodel.MahasiswaViewModel
 import com.example.pertemuan8.ui.view.viewmodel.RencanaStudyView
@@ -28,7 +30,8 @@ fun NavigationControl (
     krsViewModel: RencanaStudyViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ){
-    val mahasiswaUIState = ViewModel.mahasiswaUIState.collectAsState()
+    val mahasiswaUIState = ViewModel.mahasiswaUIState.collectAsState().value
+
     NavHost(
         navController = navController,
         startDestination = Halaman.Splash.name,
@@ -37,8 +40,7 @@ fun NavigationControl (
         composable(
             route = Halaman.Splash.name
         ){
-            SplashView(
-                onMulaiButton = {
+            SplashView(onSubmitButtonClicked = {
                     navController.navigate(Halaman.Mahasiswa.name)
                 }
             )
