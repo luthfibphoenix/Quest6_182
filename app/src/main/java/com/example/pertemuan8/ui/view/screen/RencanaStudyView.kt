@@ -1,7 +1,9 @@
 package com.example.pertemuan8.ui.view.screen
 
+import android.text.Layout
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +19,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pertemuan8.R
 import com.example.pertemuan8.data.MataKuliah
+import com.example.pertemuan8.data.RuangKelas
 import com.example.pertemuan8.model.Mahasiswa
 import com.example.pertemuan8.ui.widget.DynamicSelectedTextField
 
@@ -98,7 +102,10 @@ fun RencanaStudiView(
                     .padding(16.dp)
             ){
                 Text(text = "Pilih Mata Kuliah Peminatan")
-                Text(text = "Silahkan pilih mata kuliah yang anda inginkan")
+                Text(text = "Silahkan pilih mata kuliah yang anda inginkan",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Light
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 DynamicSelectedTextField(
                     selectedValue = choseDropdown,
@@ -112,9 +119,24 @@ fun RencanaStudiView(
                 Divider()
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = "Pilih Kelas")
-                Text(text = "Silahkan pilih kelas yang anda inginkan")
+                Text(text = "Silahkan pilih kelas yang anda inginkan",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Light
+                )
                 Spacer(modifier = Modifier.height(8.dp))
-
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Absolute.SpaceEvenly
+                ){
+                    RuangKelas.kelas.forEach { data ->
+                        Row(verticalAlignment = Alignment.CenterVertically){
+                            RadioButton(
+                                selected = pilihanKelas == data,
+                                onClick = { pilihanKelas = data }
+                            )
+                        }
+                    }
+                }
             }
         }
     }
