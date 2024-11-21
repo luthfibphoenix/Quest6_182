@@ -1,8 +1,8 @@
 package com.example.pertemuan8.Navigation
-
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -10,8 +10,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.navigasidengandata.ui.view.screen.MahasiswaFormView
-import com.example.pertemuan8.ui.view.screen.SplashView
 import com.example.pertemuan8.ui.view.viewmodel.MahasiswaViewModel
 import com.example.pertemuan8.ui.view.viewmodel.RencanaStudyView
 
@@ -27,10 +25,10 @@ enum class Halaman{
 fun NavigationControl (
     modifier: Modifier = Modifier,
     mahasiswaViewModel: MahasiswaViewModel = viewModel(),
-    krsViewModel: RencanaStudyViewModel = viewModel(),
+    krsViewModel: RencanaStudyView = viewModel(),
     navController: NavHostController = rememberNavController()
 ){
-    val mahasiswaUIState = ViewModel.mahasiswaUIState.collectAsState().value
+    val uistate by krsViewModel.statusUI.collectAsState()
 
     NavHost(
         navController = navController,
@@ -40,7 +38,8 @@ fun NavigationControl (
         composable(
             route = Halaman.Splash.name
         ){
-            SplashView(onSubmitButtonClicked = {
+            SplashView(
+                onMulaiButton = {
                     navController.navigate(Halaman.Mahasiswa.name)
                 }
             )
@@ -50,7 +49,7 @@ fun NavigationControl (
         ){
             MahasiswaFormView(
                 onSubmitButtonClicked = {
-                    viewModel.setMahasiswa(it)
+                    mahasiswaViewModel.saveDataMahasiswa(it)
                     navController.navigate(Halaman.Matakuliah.name)},
                 onBackButtonClicked = {navController.popBackStack()}
             )
@@ -58,10 +57,10 @@ fun NavigationControl (
         composable(
             route = Halaman.Matakuliah.name
         ){
-            MatakuliahView(
-                uiState = uistate,
-                onSimpanButtonClicked = {
-                    viewModel.setMatakuliah(it)
+            RencanaStudyView(
+                mahasiswa = mahasiswaUIState,
+                onSubmitButtonClicked = {
+                    krsViewModel.saveDataKRS(it)
                     navController.navigate(Halaman.Tampil.name)
                 },
             )
