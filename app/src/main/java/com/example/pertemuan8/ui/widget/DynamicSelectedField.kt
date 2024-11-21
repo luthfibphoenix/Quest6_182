@@ -44,6 +44,21 @@ fun DynamicSelectedTextField(
                 .menuAnchor()
                 .fillMaxWidth()
         )
+
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            options.forEach { option ->
+                DropdownMenuItem(
+                    text = { Text(text = option) },
+                    onClick = {
+                        expanded = false
+                        onValueChangedEvent(option)
+                    }
+                )
+            }
+        }
     }
 }
 
