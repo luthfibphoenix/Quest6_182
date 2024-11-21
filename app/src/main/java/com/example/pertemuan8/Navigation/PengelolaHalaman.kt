@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.example.pertemuan8.ui.view.sceen.SplashView
 import com.example.pertemuan8.ui.view.viewmodel.MahasiswaViewModel
 
 
@@ -21,8 +22,8 @@ enum class Halaman{
 @Composable
 fun NavigationControl (
     modifier: Modifier = Modifier,
-    viewModel: MahasiswaViewModel = ViewModel(),
-    navController: NavHostController = rememberNavController()
+    mahasiswaViewModel: MahasiswaViewModel = ViewModel(),
+    krsViewModel: RencanaStudiViewModel = ViewModel(),
 ){
     val uistate by ViewModel.mahasiswaUIState.collectAsState()
     NavHost(
